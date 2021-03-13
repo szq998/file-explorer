@@ -1,50 +1,6 @@
-import { list } from './App.js'
+import {formatFileSize, formatTimestamp} from "./utilities.js";
+import {list} from './App.js'
 import React, {Component} from 'react'
-
-function formatFileSize(size) {
-    let formatted = size
-    let unit = "B"
-    const units = ["KB", "MB", "GB", "TB"]
-    for (let i = 0; i < units.length && formatted > 1024; i++) {
-        formatted /= 1024
-        unit = units[i]
-    }
-    formatted = formatted.toFixed(2).replace(/\.?0+$/, "")
-    formatted += unit
-    return formatted
-}
-
-function formatTimestamp(timestamp) {
-    let date = new Date(timestamp)
-    let diff = new Date() - date
-    if (diff > 0) {
-        if (diff < 1000) {
-            return "现在"
-        }
-
-        let sec = Math.floor(diff / 1000)
-        if (sec < 60) {
-            return sec + "秒前"
-        }
-
-        let min = Math.floor(diff / 60000)
-        if (min < 60) {
-            return min + "分钟前"
-        }
-    }
-
-    let d = date
-    d = [
-        d.getFullYear(),
-        d.getMonth() + 1,
-        d.getDate(),
-        d.getHours(),
-        d.getMinutes()
-    ].map(component => component.toString().padStart(2, "0"))
-
-    return d.slice(0, 3).join('/') + ' ' + d.slice(-2).join(':')
-
-}
 
 function Location(props) {
     const style = {
@@ -117,7 +73,7 @@ function FileListItem(props) {
 
 function FileList(props) {
     const {files} = props
-    const items = files.map((file) => <FileListItem key={file.name} file={file} />
+    const items = files.map((file) => <FileListItem key={file.name} file={file}/>
     )
     return (
         <div>
@@ -130,14 +86,15 @@ class FileView extends Component {
     state = {
         location: ["root", "sub", "dir"],
         files: [
-            {name: 'file1', size: 65536, timestamp: 123456, isDirectory:false},
-            {name: 'file2.txt', size: 123456, timestamp: 723456, isDirectory:false},
-            {name: 'file3', size: 656, timestamp: 823456, isDirectory:false},
-            {name: 'file4', size: 123123456, timestamp: 923456, isDirectory:false},
-            {name: 'dir1', size: 16, timestamp: 923456, isDirectory:true},
-            {name: 'dir2', size: 2, timestamp: Date.now() - 100000, isDirectory:true},
+            {name: 'file1', size: 65536, timestamp: 123456, isDirectory: false},
+            {name: 'file2.txt', size: 123456, timestamp: 723456, isDirectory: false},
+            {name: 'file3', size: 656, timestamp: 823456, isDirectory: false},
+            {name: 'file4', size: 123123456, timestamp: 923456, isDirectory: false},
+            {name: 'dir1', size: 16, timestamp: 923456, isDirectory: true},
+            {name: 'dir2', size: 2, timestamp: Date.now() - 100000, isDirectory: true},
         ]
     }
+
     render() {
         const barStyle = {
             display: "flex",
@@ -148,10 +105,10 @@ class FileView extends Component {
 
         const {location, files} = this.state
         return (
-            <div style={{flexGrow:"1"}}>
+            <div style={{flexGrow: "1"}}>
                 <div style={barStyle}>
-                    <Location location={location} />
-                    <ToolBar />
+                    <Location location={location}/>
+                    <ToolBar/>
                 </div>
                 <FileList files={files}/>
             </div>

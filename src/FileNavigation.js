@@ -1,43 +1,7 @@
+import {deepClone} from "./utilities.js";
 import {list} from './App.js'
 import React, {Component} from 'react'
 
-function deepCloneArray(arr) {
-    const newArr = Array(arr.length)
-    for (let i = 0; i < arr.length; i++) {
-        if (Array.isArray(arr[i])) {
-            newArr[i] = deepCloneArray(arr[i])
-        } else if (arr[i] !== null && typeof arr[i] === "object") {
-            newArr[i] = deepCloneObj(arr[i])
-        } else {
-            newArr[i] = arr[i]
-        }
-    }
-    return newArr
-}
-
-function deepCloneObj(obj) {
-    const newObj = {}
-    for (const p in obj) {
-        if (Array.isArray(obj[p])) {
-            newObj[p] = deepCloneArray(obj[p])
-        } else if (obj[p] !== null && typeof obj[p] === "object") {
-            newObj[p] = deepCloneObj(obj[p])
-        } else {
-            newObj[p] = obj[p]
-        }
-    }
-    return newObj
-}
-
-function deepClone(target) {
-    if (Array.isArray(target)) {
-        return deepCloneArray(target)
-    } else if (target !== null && typeof target === "object") {
-        return deepCloneObj(target)
-    } else {
-        return target
-    }
-}
 
 function _FoldableDirList(dirs, key = null) {
     const liStyle = {
