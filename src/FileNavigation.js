@@ -92,7 +92,7 @@ class FileNavigation extends Component {
         directories: [] // this.directories
     }
 
-    async getDirectories(pathIdx) {
+    async queryDirectories(pathIdx) {
         let {directories} = this.state
         const path = []
         for (const idx of pathIdx) {
@@ -123,11 +123,12 @@ class FileNavigation extends Component {
             this.setState({directories: newState})
         } else {  // currently folded, need unfold
             const dirName = clicked
-            this.getDirectories(pathIdx).then(subDirs => {
+            this.queryDirectories(pathIdx).then(subDirs => {
                 containerOfClicked[clickedIdx] = {
                     dirName,
                     subDirs
                 }
+                // setTimeout(()=>this.setState({directories: newState}), 2000)
                 this.setState({directories: newState})
             })
         }
