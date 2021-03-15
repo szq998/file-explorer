@@ -32,8 +32,8 @@ class FileView extends Component {
     }
 
     download = (name) => {
-        console.log("download " + name)
-
+        const downloadLink = "/" + this.state.location.concat(name).join("/")
+        download(downloadLink)
     }
 
     componentDidMount() {
