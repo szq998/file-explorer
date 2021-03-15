@@ -24,10 +24,13 @@ class FileView extends Component {
     ]*/
 
     gotoLocation = async (location) => {
-        const files = await list("/" + location.join("/"))
+        const path = "/" + location.join("/")
+        const files = await list(path)
         this.setState({
             location: location,
             files
+        }, () => {
+            window.history.replaceState(null, null, path)
         })
     }
 
@@ -42,7 +45,17 @@ class FileView extends Component {
     }
 
     componentDidMount() {
-        this.gotoLocation([])
+        // const currLoc = window.location.pathname.split("/").slice(1)
+        // if (currLoc[0] === "") { currLoc.pop() }
+
+        let currLoc
+        const pathname = window.location.pathname
+        if (pathname === "/") {
+            currLoc = []
+        } else {
+            currLoc = pathname.split("/").filter(v => v !== "")
+        }
+        this.gotoLocation(currLoc)
     }
 
     render() {
