@@ -3,6 +3,16 @@ import FileView from "./FileView";
 import React, {Component} from "react";
 
 class FileExplorer extends Component {
+    navSubscribers = []
+
+    subscribeNavigation = (callback) => {
+        this.navSubscribers.push(callback)
+    }
+
+    navigationChanged = (path) => {
+        this.navSubscribers.forEach(sb => sb(path))
+    }
+
     render() {
         const style = {
             display: "flex",
@@ -12,8 +22,8 @@ class FileExplorer extends Component {
         }
         return (
             <div style={style}>
-                <FileNavigation />
-                <FileView />
+                <FileNavigation notifyNavigation={this.navigationChanged} />
+                <FileView subscribeNavigation={this.subscribeNavigation} />
             </div>
         );
     }

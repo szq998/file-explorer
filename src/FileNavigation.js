@@ -53,7 +53,14 @@ class FoldableDirList extends Component {
         if (target.tagName !== "LI") return
 
         const path = this.getPathIndex(target)
-        this.props.onClick(path)
+        this.props.unfold(path)
+    }
+
+    handleDoubleClick = ({target}) => {
+        if (target.tagName !== "LI") return
+
+        const path = this.getPathIndex(target)
+        this.props.onDoubleClickWithPath(path)
     }
 
     render() {
@@ -61,6 +68,7 @@ class FoldableDirList extends Component {
         return (
             <div
                 onClick={this.handleClick}
+                onDoubleClick={this.handleDoubleClick}
             >
                 {_FoldableDirList(directories)}
             </div>
@@ -106,7 +114,7 @@ class FileNavigation extends Component {
         return dirNames
     }
 
-    handleClick = (pathIdx) => {
+    unfold = (pathIdx) => {
         const {directories} = this.state
         const newState = deepClone(directories)
 
@@ -134,6 +142,21 @@ class FileNavigation extends Component {
         }
     }
 
+    handleDoubleClickWithPath = (pathIdx) => {
+        const path = []
+        let {directories: currDir} = this.state
+        debugger
+        for (const idx of pathIdx.slice(0, -1)) {
+            path.push(currDir[idx].dirName)
+            currDir = currDir[idx].subDirs
+        }
+        const lastIdx = pathIdx[pathIdx.length - 1]
+        const last = typeof currDir[lastIdx] === "string" ? currDir[lastIdx] : currDir[lastIdx].dirName
+        path.push(last)
+
+        this.props.notifyNavigation(path)
+    }
+
     async componentDidMount() {
         let fileInfoList = await list(window.location.pathname)
         fileInfoList = fileInfoList.filter(fileInfo => fileInfo.isDirectory)
@@ -151,7 +174,8 @@ class FileNavigation extends Component {
         return (
             <div style={style}>
                 <FoldableDirList
-                    onClick={this.handleClick}
+                    unfold={this.unfold}
+                    onDoubleClickWithPath={this.handleDoubleClickWithPath}
                     directories={directories}
                 />
             </div>

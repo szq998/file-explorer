@@ -5,6 +5,11 @@ import {FileList} from "./FileList";
 import {ToolBar} from "./ToolBar";
 
 class FileView extends Component {
+    constructor(props) {
+        super(props);
+        this.props.subscribeNavigation(this.gotoLocation)
+    }
+
     state = {
         location: [], //["root", "sub", "dir"],
         files: []
