@@ -1,4 +1,4 @@
-import {list} from './App.js'
+import {list, download} from './App.js'
 import React, {Component} from 'react'
 import {Location} from "./Location";
 import {FileList} from "./FileList";
@@ -19,7 +19,6 @@ class FileView extends Component {
     ]*/
 
     gotoLocation = async (location) => {
-        console.log("go to path " + location)
         const files = await list("/" + location.join("/"))
         this.setState({
             location: location,
@@ -27,14 +26,9 @@ class FileView extends Component {
         })
     }
 
-    openDir = async (dirName) => {
-        console.log("open dir " + dirName)
+    openDir = (dirName) => {
         const location = this.state.location.concat(dirName)
-        const files = await list("/" + location.join("/"))
-        this.setState({
-            location,
-            files
-        })
+        this.gotoLocation(location)
     }
 
     download = (name) => {
@@ -42,11 +36,8 @@ class FileView extends Component {
 
     }
 
-    async componentDidMount() {
-        const files = await list("/")
-        this.setState({
-            files
-        })
+    componentDidMount() {
+        this.gotoLocation([])
     }
 
     render() {
