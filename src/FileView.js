@@ -57,7 +57,11 @@ class FileView extends Component {
         return (
             <div style={{flexGrow: "1"}}>
                 <div style={barStyle}>
-                    <Location location={location} goto={this.gotoLocation}/>
+                    <Location
+                        location={location}
+                        goto={this.gotoLocation}
+                        refresh={this.gotoLocation.bind(null, location)}
+                    />
                     <ToolBar/>
                 </div>
                 <FileList files={files} openDir={this.openDir} download={this.download}/>

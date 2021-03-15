@@ -30,7 +30,7 @@ export function Location(props) {
                 {locParts}
             </div>
             <div>
-                <button>刷新</button>
+                <button onClick={props.refresh}>刷新</button>
             </div>
         </div>
     )
