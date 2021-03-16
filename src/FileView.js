@@ -75,7 +75,7 @@ class FileView extends Component {
                         goto={this.gotoLocation}
                         refresh={this.gotoLocation.bind(null, location)}
                     />
-                    <ToolBar/>
+                    <ToolBar location={location}/>
                 </div>
                 <FileList files={files} openDir={this.openDir} download={this.download}/>
             </div>

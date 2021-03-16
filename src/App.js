@@ -12,6 +12,9 @@ class App extends Component {
     }
 }
 
+// const host = ""
+const host = "http://localhost:3001"
+
 async function list(path) {
     // const res = await fetch(path + "?operation=list")
     // const listed = await res.json()
@@ -36,4 +39,23 @@ function download(path) {
     a.click()
 }
 
-export { App as default, list, download };
+function upload(path, files) {
+    if (!files.length) return
+    console.log(path)
+    console.log(files)
+    for (const file of files) {
+        const {name} = file
+        const form = new FormData()
+        form.set("filename", name)
+        form.set("file", file, name)
+        fetch(host + `${path}?operation=upload`, {
+            method: "POST",
+            body: form
+        })
+            .then(res => res.json())
+            .then(console.log)
+            .catch(console.log.bind(null, `Failed to upload file "${name}":`))
+    }
+}
+
+export { App as default, list, download, upload };
