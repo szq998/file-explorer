@@ -29,6 +29,8 @@ function FileListItem(props) {
 
 export function FileList(props) {
     const {files} = props
+    if (!files) return null
+
     const items = files.map((file) => (
             <FileListItem
                 key={file.name}

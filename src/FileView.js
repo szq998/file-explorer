@@ -11,8 +11,8 @@ class FileView extends Component {
     }
 
     state = {
-        location: [], //["root", "sub", "dir"],
-        files: []
+        location: null, //["root", "sub", "dir"],
+        files: null
     }
     /* [
         {name: 'file1', size: 65536, timestamp: 123456, isDirectory: false},

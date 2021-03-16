@@ -12,6 +12,8 @@ export function Location(props) {
         border: "1px solid gray"
     }
 
+    if (!props.location) return null
+
     const {location} = props
     const locParts = location.map((part, idx) => (
             <span key={`${part}-${idx}`}>
