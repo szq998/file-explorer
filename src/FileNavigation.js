@@ -145,7 +145,7 @@ class FileNavigation extends Component {
     handleDoubleClickWithPath = (pathIdx) => {
         const path = []
         let {directories: currDir} = this.state
-        debugger
+
         for (const idx of pathIdx.slice(0, -1)) {
             path.push(currDir[idx].dirName)
             currDir = currDir[idx].subDirs
@@ -158,7 +158,7 @@ class FileNavigation extends Component {
     }
 
     async componentDidMount() {
-        let fileInfoList = await list(window.location.pathname)
+        let fileInfoList = await list("/")
         fileInfoList = fileInfoList.filter(fileInfo => fileInfo.isDirectory)
         const dirNames = fileInfoList.map(fileInfo => fileInfo.name)
         this.setState({directories: dirNames})
