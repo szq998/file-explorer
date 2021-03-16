@@ -16,16 +16,16 @@ class App extends Component {
 const host = "http://localhost:3001"
 
 async function list(path) {
-    // const res = await fetch(path + "?operation=list")
-    // const listed = await res.json()
-    const listed = [
-        {name: 'file1', size: 65536, timestamp: 123456, isDirectory:false},
-        {name: 'file2.txt', size: 123456, timestamp: 723456, isDirectory:false},
-        {name: 'file3', size: 656, timestamp: 823456, isDirectory:false},
-        {name: 'file4', size: 123123456, timestamp: 923456, isDirectory:false},
-        {name: 'dir1', size: 16, timestamp: 923456, isDirectory:true},
-        {name: 'dir2', size: 2, timestamp: Date.now() - 100000, isDirectory:true},
-    ]
+    const res = await fetch(host + path + "?operation=list")
+    const listed = await res.json()
+    // const listed = [
+    //     {name: 'file1', size: 65536, timestamp: 123456, isDirectory:false},
+    //     {name: 'file2.txt', size: 123456, timestamp: 723456, isDirectory:false},
+    //     {name: 'file3', size: 656, timestamp: 823456, isDirectory:false},
+    //     {name: 'file4', size: 123123456, timestamp: 923456, isDirectory:false},
+    //     {name: 'dir1', size: 16, timestamp: 923456, isDirectory:true},
+    //     {name: 'dir2', size: 2, timestamp: Date.now() - 100000, isDirectory:true},
+    // ]
     return listed
 }
 
@@ -34,9 +34,10 @@ function download(path) {
     if (!filename.length) return
 
     const a = document.createElement("a")
-    a.href = path + "?operation=download"
+    a.href = host + path + "?operation=download"
     a.download = filename
     a.click()
+    a.remove()
 }
 
 function upload(path, files) {
