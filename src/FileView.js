@@ -59,17 +59,10 @@ class FileView extends Component {
     }
 
     render() {
-        const barStyle = {
-            display: "flex",
-            flexFlow: "row wrap",
-            justifyContent: "space-between",
-            alignItems: "center",
-        }
-
         const {location, files} = this.state
         return (
-            <div style={{flexGrow: "1"}}>
-                <div style={barStyle}>
+            <div>
+                <div>
                     <Location
                         location={location}
                         goto={this.gotoLocation}

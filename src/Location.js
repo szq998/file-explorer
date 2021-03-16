@@ -1,17 +1,6 @@
 import React from "react";
 
 export function Location(props) {
-    const style = {
-        display: "flex",
-        flexFlow: "row wrap",
-        justifyContent: "space-between",
-        alignItems: "center",
-
-        width: "50%",
-
-        border: "1px solid gray"
-    }
-
     if (!props.location) return null
 
     const {location} = props
@@ -26,7 +15,7 @@ export function Location(props) {
     )
 
     return (
-        <div style={style}>
+        <div>
             <div>
                 <span onClick={props.goto.bind(null, [])}> / </span>
                 {locParts}

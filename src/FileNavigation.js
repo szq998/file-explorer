@@ -4,9 +4,6 @@ import React, {Component} from 'react'
 
 
 function _FoldableDirList(dirs, key = null) {
-    const liStyle = {
-        "listStyle": "none"
-    }
     const dirList = []
     for (let i = 0; i < dirs.length; i++) {
         const dir = dirs[i]
@@ -14,8 +11,7 @@ function _FoldableDirList(dirs, key = null) {
         if (typeof dir === "string") {  // folded
             const dirName = dir
             listItem = (
-                <li style={liStyle}
-                    key={dirName}
+                <li key={dirName}
                     data-dir-idx={i}
                 >
                     {"▸" + dirName}
@@ -24,9 +20,7 @@ function _FoldableDirList(dirs, key = null) {
         } else {  // unfolded
             const {dirName, subDirs} = dir
             listItem = (
-                <li
-                    style={liStyle}
-                    key={dirName}
+                <li key={dirName}
                     data-dir-idx={i}
                 >
                     {"▾" + dirName}
@@ -165,14 +159,9 @@ class FileNavigation extends Component {
     }
 
     render() {
-        const style = {
-            overflow: "auto",
-            maxWidth: 200,
-        }
-
         const {directories} = this.state
         return (
-            <div style={style}>
+            <div>
                 <FoldableDirList
                     unfold={this.unfold}
                     onDoubleClickWithPath={this.handleDoubleClickWithPath}
