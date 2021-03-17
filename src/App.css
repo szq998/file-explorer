@@ -1,38 +1,215 @@
-.App {
-  text-align: center;
+.file-explorer {
+}
+/*clear fix*/
+.file-explorer::after {
+    content: "";
+    display: table;
+    clear: both;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.file-navigation {
+    float: left;
+    overflow: auto;
+    width: 17rem;
+    height: 100vh;
+    padding: 0.5rem;
+    border-right: darkgray solid 1px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.file-navigation__dir-list li{
+    list-style: none;
+    white-space: nowrap;
+    transition: all .3s;
+}
+.file-navigation-li-hovered {
+    background-color: lightgrey;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.file-navigation__dir-list ol{
+    padding-left: 0.8rem;
 }
 
-.App-link {
-  color: #61dafb;
+.file-navigation__dir-list>ol{
+    margin-block-start: 0;
+    margin-block-end: 0;
+    padding-left: 0;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.file-navigation__no-dir {
+    padding-left: 1.2rem;
 }
+
+.file-navigation__folder-icon {
+    pointer-events: none;
+}
+
+.file-view {
+    float: left;
+    width: calc(100% - 17rem);
+    height: 100vh;
+}
+
+.file-view__top-bar {
+    position: relative;
+    height: 2.5rem;
+    border-bottom: darkgray solid 1px;
+}
+/*clear fix*/
+/*.file-view__top-bar::after {*/
+/*    content: "";*/
+/*    display: table;*/
+/*    clear: both;*/
+/*}*/
+
+.location-bar {
+    position: absolute;
+    /*float: left;*/
+    width: 50%;
+    height: 100%;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    border-right: darkgray solid 1px;
+}
+
+.location-bar__location {
+    display: inline-block;
+    position: absolute;
+    white-space: nowrap;
+    top: 50%;
+    transform: translateY(-50%);
+    width: calc(100% - 4rem);
+    margin-left: 0.5rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+
+}
+.location-bar__location-part{
+    display: inline-block;
+    transition: all .3s;
+}
+.location-bar__location-part:hover {
+    background-color: lightgrey;
+    border: darkgray solid 1px;
+    transform: scale(1.1);
+}
+
+.location-bar__btn {
+    /*display: inline-block;*/
+    /*float: right;*/
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-right: 0.5rem;
+}
+
+.toolbar {
+    position: absolute;
+    right: 0;
+    /*float: left;*/
+    width: 50%;
+    height: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    /*text-align: right;*/
+    padding-right: .5rem;
+
+}
+
+.toolbar__btn-area {
+    /*display: inline-block;*/
+    position: absolute;
+    right: .5rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+/*.toolbar::before {*/
+/*    content: "";*/
+/*    display: inline-block;*/
+/*    height: 100%;*/
+/*    vertical-align: middle;*/
+/*}*/
+/*clear fix*/
+/*.toolbar::after {*/
+/*    content: "";*/
+/*    display: table;*/
+/*    clear: both;*/
+/*}*/
+
+.toolbar__btn:not(:first-child) {
+    /*display: inline-block;*/
+    /*position: absolute;*/
+    /*top: 50%;*/
+    /*transform: translateY(-50%);*/
+    /*vertical-align: middle;*/
+    margin-left: 1.5rem;
+}
+
+.file-list {
+    height: calc(100% - 2.5rem);
+    overflow: auto;
+    padding: 0 .4rem 0 .4rem;
+}
+
+.file-item {
+    position: relative;
+    height: 3.8rem;
+    transition: all .3s;
+    animation: fileIn .4s ease-out;
+}
+.file-item:hover {
+    background-color: lightgrey;
+    transform: translateY(-3px) scale(1.01);
+}
+.file-item:not(:last-child) {
+    border-bottom: darkgray solid 1px;
+}
+.file-item__icon {
+    position: absolute;
+    left: .2rem;
+    font-size: 3rem;
+}
+.file-item__name {
+    position: absolute;
+    left: 3.5rem;
+    top: .4rem;
+}
+.file-item__size {
+    position: absolute;
+    left: 3.5rem;
+    bottom: .5rem;
+    color: gray;
+    font-size: .8rem;
+}
+.file-item__time {
+    position: absolute;
+    white-space: nowrap;
+    width: 10rem;
+    left: 100%;
+    margin: auto 0;
+    top: 50%;
+    transform: translateX(-100%) translateX(-1rem) translateY(-50%);
+    color: gray;
+    font-size: .8rem;
+}
+.file-item__dir-arrow {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: gray;
+    font-size: .8rem;
+}
+
+@keyframes fileIn {
+    0% {
+        transform: translateX(3rem) scale(.9) rotateY(45deg) rotateX(90deg);
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateX(0) scale(1) rotateY(0) rotateX(0);
+        opacity: 1;
+    }
+}
+
