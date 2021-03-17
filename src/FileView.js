@@ -61,8 +61,8 @@ class FileView extends Component {
     render() {
         const {location, files} = this.state
         return (
-            <div>
-                <div>
+            <div className="file-view">
+                <div className="file-view__top-bar">
                     <Location
                         location={location}
                         goto={this.gotoLocation}

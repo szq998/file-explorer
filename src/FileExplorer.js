@@ -15,7 +15,7 @@ class FileExplorer extends Component {
 
     render() {
         return (
-            <div>
+            <div className="file-explorer">
                 <FileNavigation notifyNavigation={this.navigationChanged} />
                 <FileView subscribeNavigation={this.subscribeNavigation} />
             </div>

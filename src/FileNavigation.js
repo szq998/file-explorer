@@ -4,6 +4,8 @@ import React, {Component} from 'react'
 
 
 function _FoldableDirList(dirs, key = null) {
+    const folderIcon = <span className="file-navigation__folder-icon"> <i className="icon-basic-folder"> </i> </span>
+
     const dirList = []
     for (let i = 0; i < dirs.length; i++) {
         const dir = dirs[i]
@@ -14,7 +16,9 @@ function _FoldableDirList(dirs, key = null) {
                 <li key={dirName}
                     data-dir-idx={i}
                 >
-                    {"▸" + dirName}
+                    {"▸"}
+                    {folderIcon}
+                    {dirName}
                 </li>
             )
         } else {  // unfolded
@@ -23,8 +27,12 @@ function _FoldableDirList(dirs, key = null) {
                 <li key={dirName}
                     data-dir-idx={i}
                 >
-                    {"▾" + dirName}
-                    {subDirs.length ? _FoldableDirList(subDirs, "subDirsOf" + dirName) : <div>无子目录</div>}
+                    {"▾"}
+                    {folderIcon}
+                    {dirName}
+                    {subDirs.length ?
+                            _FoldableDirList(subDirs, "subDirsOf" + dirName)
+                            : <div className="file-navigation__no-dir">无子目录</div>}
                 </li>
             )
         }
@@ -161,7 +169,7 @@ class FileNavigation extends Component {
     render() {
         const {directories} = this.state
         return (
-            <div>
+            <div className="file-navigation">
                 <FoldableDirList
                     unfold={this.unfold}
                     onDoubleClickWithPath={this.handleDoubleClickWithPath}

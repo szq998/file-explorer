@@ -2,18 +2,23 @@ import {formatFileSize, formatTimestamp} from "./utilities";
 import React from "react";
 
 function FileListItem(props) {
+    const folderIcon = <div className="file-item__folder-icon"><i className="icon-basic-folder"> </i></div>
+    const docIcon = <span className="file-item__doc-icon"> <i className="icon-basic-sheet"> </i> </span>
+
     const {name, size, timestamp, isDirectory} = props.file
     const formattedSize = isDirectory ? size + "项" : formatFileSize(size)
     const formattedTime = formatTimestamp(timestamp)
     return (
-        <div onClick={props.openOrDownload.bind(null, name)}>
+        <div className="file-item"
+            onClick={props.openOrDownload.bind(null, name)}>
             <div>
-                <div>{name}</div>
-                <div>{formattedSize}</div>
+                <div className="file-item__icon">{ isDirectory ? folderIcon : docIcon}</div>
+                <div className="file-item__name">{name}</div>
+                <div className="file-item__size">{formattedSize}</div>
             </div>
             <div>
-                <span>{formattedTime}</span>
-                {isDirectory ? <span> > </span> : null}
+                <span className="file-item__time">{formattedTime}</span>
+                {isDirectory ? <span className="file-item__dir-arrow"> > </span> : null}
             </div>
         </div>
     )
@@ -32,7 +37,7 @@ export function FileList(props) {
         )
     )
     return (
-        <div>
+        <div className="file-list">
             {items}
         </div>
     )
