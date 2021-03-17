@@ -50,8 +50,9 @@ function formatFileSize(size) {
 }
 
 function formatTimestamp(timestamp) {
-    let date = new Date(timestamp)
-    let diff = new Date() - date
+    const date = new Date(timestamp)
+    const now = new Date()
+    let diff = now - date
     if (diff > 0) {
         if (diff < 1000) {
             return "现在"
@@ -68,17 +69,25 @@ function formatTimestamp(timestamp) {
         }
     }
 
-    let d = date
-    d = [
-        d.getFullYear(),
-        d.getMonth() + 1,
-        d.getDate(),
-        d.getHours(),
-        d.getMinutes()
+    let d = [
+        date.getFullYear(),
+        date.getMonth() + 1,
+        date.getDate(),
+        date.getHours(),
+        date.getMinutes()
     ].map(component => component.toString().padStart(2, "0"))
 
-    return d.slice(0, 3).join('/') + ' ' + d.slice(-2).join(':')
+    const dHM = d.slice(-2).join(":")
+    let dYMD = d.slice(0, 3).join('/')
+    if (date.getDate() === now.getDate()) {
+        dYMD = "今天"
+    } else if (now.getDate() - date.getDate() === 1) {
+        dYMD = "昨天"
+    } else if (now.getDate() - date.getDate() === 2) {
+        dYMD = "前天"
+    }
 
+    return dYMD + " " + dHM
 }
 
 
