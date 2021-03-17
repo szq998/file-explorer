@@ -6,15 +6,16 @@ import FileExplorer from "./FileExplorer";
 class App extends Component {
     render() {
         return (
-            <div >
-                <FileExplorer />
+            <div>
+                <FileExplorer/>
             </div>
         );
     }
 }
 
-// const host = ""
-const host = "http://localhost:3001"
+const host = ""
+
+// const host = "http://localhost:3001"
 
 async function list(path) {
     const res = await fetch(host + path + "?operation=list")
@@ -60,4 +61,4 @@ function upload(path, files) {
     }
 }
 
-export { App as default, list, download, upload };
+export {App as default, list, download, upload};

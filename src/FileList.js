@@ -10,9 +10,9 @@ function FileListItem(props) {
     const formattedTime = formatTimestamp(timestamp)
     return (
         <div className="file-item"
-            onClick={props.openOrDownload.bind(null, name)}>
+             onClick={props.openOrDownload.bind(null, name)}>
             <div>
-                <div className="file-item__icon">{ isDirectory ? folderIcon : docIcon}</div>
+                <div className="file-item__icon">{isDirectory ? folderIcon : docIcon}</div>
                 <div className="file-item__name">{name}</div>
                 <div className="file-item__size">{formattedSize}</div>
             </div>

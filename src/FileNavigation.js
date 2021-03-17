@@ -31,8 +31,8 @@ function _FoldableDirList(dirs, key = null) {
                     {folderIcon}
                     {dirName}
                     {subDirs.length ?
-                            _FoldableDirList(subDirs, "subDirsOf" + dirName)
-                            : <div className="file-navigation__no-dir">无子目录</div>}
+                        _FoldableDirList(subDirs, "subDirsOf" + dirName)
+                        : <div className="file-navigation__no-dir">无子目录</div>}
                 </li>
             )
         }

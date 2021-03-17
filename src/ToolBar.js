@@ -1,4 +1,4 @@
-import { upload } from "./App";
+import {upload} from "./App";
 import React from "react";
 
 export class ToolBar extends React.Component {
