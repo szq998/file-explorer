@@ -65,12 +65,26 @@ class FoldableDirList extends Component {
         this.props.onDoubleClickWithPath(path)
     }
 
+    handleMouseOver = ({target}) => {
+        if (target.tagName !== "LI") return
+
+        target.classList.add("file-navigation-li-hovered")
+    }
+
+    handleMouseOut = ({target}) => {
+        if (target.tagName !== "LI") return
+
+        target.classList.remove("file-navigation-li-hovered")
+    }
+
     render() {
         const {directories} = this.props
         return (
-            <div
-                onClick={this.handleClick}
-                onDoubleClick={this.handleDoubleClick}
+            <div className="file-navigation__dir-list"
+                 onClick={this.handleClick}
+                 onDoubleClick={this.handleDoubleClick}
+                 onMouseOver={this.handleMouseOver}
+                 onMouseOut={this.handleMouseOut}
             >
                 {_FoldableDirList(directories)}
             </div>
